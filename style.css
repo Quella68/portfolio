@@ -890,11 +890,17 @@ strong { font-weight: 500; }
     letter-spacing: 0.02em;
 }
 
+/* 图片包裹层（badge 定位锚点，不裁剪） */
+.proj-img-wrap {
+    position: relative;
+}
+
 /* 角标 */
 .proj-badge {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
     font-size: 9px;
     font-weight: 500;
     padding: 2px 8px;
@@ -1575,14 +1581,9 @@ strong { font-weight: 500; }
 }
 
 /* ══════════════════════════════════════════
-   s-growth 密集节专用压缩
+   s-growth 2×2 等量卡片图片高度统一
 ══════════════════════════════════════════ */
-#s-growth { padding: 36px 72px; }
-#s-growth .section-inner { gap: 12px; }
-#s-growth .growth-main { gap: 10px; padding: 18px 20px; }
-#s-growth .growth-imgs img { height: 66px; }
-#s-growth .side-carousel img,
-#s-growth .side-carousel .carousel-track img { height: 56px !important; }
+#s-growth .carousel-track img { height: 120px !important; }
 
 /* ══════════════════════════════════════════
    移动端适配 (≤768px)
