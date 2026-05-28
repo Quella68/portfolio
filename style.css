@@ -756,13 +756,13 @@ strong { font-weight: 500; }
     overflow: hidden;
     border: 1px solid var(--border);
     cursor: zoom-in;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .side-carousel img,
 .side-carousel .carousel-track img {
     width: 100%;
-    height: 80px !important;
+    height: 62px !important;
     object-fit: cover;
     object-position: center;
     display: block;
@@ -1070,20 +1070,20 @@ strong { font-weight: 500; }
 .growth-side {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .side-card {
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--r-sm);
-    padding: 16px 18px;
+    padding: 12px 14px;
     flex: 1;
     cursor: pointer;
     transition: box-shadow 0.2s;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 }
 
 .side-card:hover { box-shadow: var(--shadow-up); }
@@ -1587,6 +1587,16 @@ strong { font-weight: 500; }
     font-size: clamp(38px, 5.5vw, 80px);
     white-space: nowrap;
 }
+
+/* ══════════════════════════════════════════
+   s-growth 密集节专用压缩
+══════════════════════════════════════════ */
+#s-growth { padding: 36px 72px; }
+#s-growth .section-inner { gap: 12px; }
+#s-growth .growth-main { gap: 10px; padding: 18px 20px; }
+#s-growth .growth-imgs img { height: 66px; }
+#s-growth .side-carousel img,
+#s-growth .side-carousel .carousel-track img { height: 56px !important; }
 
 /* ══════════════════════════════════════════
    移动端适配 (≤768px)
