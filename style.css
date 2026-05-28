@@ -1527,3 +1527,131 @@ strong { font-weight: 500; }
 .card-modal-body::-webkit-scrollbar { width: 4px; }
 .card-modal-body::-webkit-scrollbar-track { background: var(--bg); }
 .card-modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ══════════════════════════════════════════
+   桌面端零星修复
+══════════════════════════════════════════ */
+
+/* 封面职位标题 — 两行排列 */
+.cover-eyebrow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    letter-spacing: 0.06em;
+}
+.cover-eyebrow-en {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+}
+
+/* 封面底部信息不换行 */
+.cover-contact span { white-space: nowrap; }
+
+/* 封面增加一条分隔线填充空白 */
+.cover-tagline {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* 结束页标题自适应不断行 */
+.end-title {
+    font-size: clamp(38px, 5.5vw, 80px);
+    white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════
+   移动端适配 (≤768px)
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* 关闭 scroll-snap，改为正常滚动 */
+    html, body { overflow: auto; height: auto; }
+
+    .scroll-wrap {
+        height: auto;
+        overflow-y: visible;
+        scroll-snap-type: none;
+    }
+
+    .scroll-wrap section {
+        height: auto;
+        min-height: 100svh;
+        scroll-snap-align: none;
+        padding: 44px 20px;
+        overflow: visible;
+    }
+
+    .dot-nav { display: none; }
+
+    .section-inner {
+        gap: 16px;
+        max-width: 100%;
+    }
+
+    /* ── 封面 ── */
+    .cover-inner {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .cover-left {
+        padding: 48px 28px 36px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    .cover-name { font-size: 52px; }
+    .cover-right {
+        height: 220px;
+        border-right: none;
+    }
+    .cover-photo { width: 140px; height: 196px; }
+    .cover-contact { flex-wrap: wrap; gap: 10px 20px; }
+
+    /* ── 关于我 ── */
+    .about-inner {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .about-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-align: left;
+    }
+    .about-avatar { margin: 0; flex-shrink: 0; }
+    .about-grid { grid-template-columns: 1fr 1fr; }
+
+    /* ── 核心能力 ── */
+    .big-metrics { grid-template-columns: 1fr 1fr; }
+    .bm-num { font-size: 28px; }
+    .comp-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    /* ── 职业经历 ── */
+    .career-timeline { grid-template-columns: 1fr; }
+
+    /* ── 项目卡片 ── */
+    .proj-grid--2, .proj-grid--3 { grid-template-columns: 1fr; }
+    .sec-sub-row { grid-template-columns: 1fr 1fr; }
+
+    /* ── 内容增长 ── */
+    .growth-layout { grid-template-columns: 1fr; }
+
+    /* ── 方法论 ── */
+    .method-layout { grid-template-columns: 1fr; gap: 20px; }
+
+    /* ── 荣誉 ── */
+    .honors-layout { grid-template-columns: 1fr; gap: 20px; }
+
+    /* ── 结束页 ── */
+    .end-title { font-size: 36px; white-space: normal; }
+
+    /* ── 弹窗 ── */
+    .card-modal { padding: 12px; }
+    .card-modal-body { padding: 20px 16px; max-height: 90vh; }
+    .lightbox { padding: 20px; }
+}
