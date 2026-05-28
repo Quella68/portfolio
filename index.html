@@ -210,7 +210,7 @@
                 <div class="proj-grid proj-grid--3">
                     <div class="proj-card" data-card-expand>
                         <div class="proj-badge proj-badge--star">季度之星</div>
-                        <div class="proj-img"><img loading="lazy" src="每日一言好运连连官网活动页面.png" alt="好运连连"></div>
+                        <div class="proj-img"><img loading="lazy" src="每日一言好运连连.jpg" alt="好运连连"></div>
                         <h3>好运连连 · 体验打卡</h3>
                         <div class="proj-pills">
                             <span>触达 227万</span><span>参与率 83.71%</span><span>超预期 8.4×</span>
@@ -273,7 +273,20 @@
                 <div class="proj-grid proj-grid--2">
                     <div class="proj-card proj-card--lg" data-card-expand>
                         <div class="proj-badge proj-badge--star">季度之星</div>
-                        <div class="proj-img proj-img--lg"><img loading="lazy" src="MBAI人格画像最后一页.png" alt="MBAI"></div>
+                        <div class="proj-img proj-img--lg carousel" data-carousel>
+                            <div class="carousel-track">
+                                <img loading="lazy" src="MBAI年度人格画像1.png" alt="MBAI年度人格画像">
+                                <img loading="lazy" src="MBAI年度人格画像2.jpg" alt="MBAI年度人格画像">
+                                <img loading="lazy" src="MBAI年度人格画像3.png" alt="MBAI年度人格画像">
+                                <img loading="lazy" src="MBAI年度人格画像4.jpg" alt="MBAI年度人格画像">
+                            </div>
+                            <div class="carousel-dots">
+                                <span class="carousel-dot active"></span>
+                                <span class="carousel-dot"></span>
+                                <span class="carousel-dot"></span>
+                                <span class="carousel-dot"></span>
+                            </div>
+                        </div>
                         <h3>MBAI 年度人格画像</h3>
                         <div class="proj-pills">
                             <span>CTR 19.5%</span><span>曝光达成率 160%</span><span>被 KIMI 复刻</span>
@@ -621,6 +634,38 @@
     });
     cardModalClose.addEventListener('click', closeModal);
     cardModal.addEventListener('click', e => { if (e.target === cardModal) closeModal(); });
+
+    // ── 轮播图 ──
+    document.querySelectorAll('[data-carousel]').forEach(car => {
+        const track = car.querySelector('.carousel-track');
+        const imgs  = track.querySelectorAll('img');
+        const dots  = car.querySelectorAll('.carousel-dot');
+        let idx = 0;
+
+        function goTo(n) {
+            idx = (n + imgs.length) % imgs.length;
+            track.style.transform = `translateX(-${idx * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+
+        // 点击图片直接 lightbox
+        track.addEventListener('click', e => {
+            if (e.target.tagName === 'IMG') {
+                e.stopPropagation();
+                openLightbox(imgs[idx].src, imgs[idx].alt);
+            }
+        });
+
+        // 自动轮播，section 可见时运行
+        let timer;
+        const startAuto = () => { timer = setInterval(() => goTo(idx + 1), 2800); };
+        const stopAuto  = () => clearInterval(timer);
+
+        const sectionEl = car.closest('section');
+        new IntersectionObserver(entries => {
+            entries[0].isIntersecting ? startAuto() : stopAuto();
+        }, { threshold: 0.3 }).observe(sectionEl || car);
+    });
     </script>
 </body>
 </html>

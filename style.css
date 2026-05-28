@@ -749,6 +749,46 @@ strong { font-weight: 500; }
 
 .proj-card--lg .proj-card h3 { font-size: 15px; }
 
+/* ── 轮播图 ── */
+.carousel .carousel-track {
+    display: flex;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.carousel .carousel-track img {
+    min-width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    cursor: zoom-in;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.carousel-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: background 0.3s, transform 0.3s;
+}
+
+.carousel-dot.active {
+    background: #fff;
+    transform: scale(1.35);
+}
+
 /* 图片区域 */
 .proj-img {
     border-radius: 6px;
