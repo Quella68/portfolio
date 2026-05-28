@@ -749,6 +749,29 @@ strong { font-weight: 500; }
 
 .proj-card--lg .proj-card h3 { font-size: 15px; }
 
+/* ── Side-card 小轮播 ── */
+.side-carousel {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    cursor: zoom-in;
+    margin-bottom: 6px;
+}
+
+.side-carousel img,
+.side-carousel .carousel-track img {
+    width: 100%;
+    height: 80px !important;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.side-carousel:hover img,
+.side-carousel:hover .carousel-track img { transform: scale(1.04); }
+
 /* ── 轮播图 ── */
 .carousel .carousel-track {
     display: flex;
