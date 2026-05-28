@@ -1580,10 +1580,8 @@ strong { font-weight: 500; }
     white-space: nowrap;
 }
 
-/* ══════════════════════════════════════════
-   s-growth 2×2 等量卡片图片高度统一
-══════════════════════════════════════════ */
-#s-growth .carousel-track img { height: 120px !important; }
+/* 普通卡片（非 --lg）内的轮播图保持 120px，避免被通用轮播规则覆盖为 160px */
+.proj-img:not(.proj-img--lg) .carousel-track img { height: 120px !important; }
 
 /* ══════════════════════════════════════════
    移动端适配 (≤768px)
