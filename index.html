@@ -51,11 +51,26 @@
         <section id="s-about">
             <div class="section-inner about-inner">
                 <div class="about-left">
-                    <div class="about-avatar">
-                        <img src="4E054D9B-478D-44B0-A980-19CA73D34670.PNG" alt="">
-                    </div>
                     <h2 class="about-name">关于我</h2>
                     <p class="about-en">About Me</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <span class="about-stat-num">5年</span>
+                            <span class="about-stat-label">互联网运营经验</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">2.5年</span>
+                            <span class="about-stat-label">AI 产品运营</span>
+                        </div>
+                        <div class="about-stat about-stat--accent">
+                            <span class="about-stat-num">4项</span>
+                            <span class="about-stat-label">创新被竞品复刻</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">10亿+</span>
+                            <span class="about-stat-label">规模化运营触达</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="about-right">
                     <p class="about-intro">从内容策划到新媒体运营，再到AI产品运营经理，5年互联网运营经验中持续完成角色跃迁。擅长以<strong>产品化思维</strong>驱动用户增长，以<strong>低成本内容策略</strong>实现超行业均值的增长效率。具备从0到1搭建运营体系、独立推动功能落地、全渠道增长实战的完整能力链。</p>
@@ -699,13 +714,13 @@
 
     function openModal(card) {
         const clone = card.cloneNode(true);
-        // 清除 data 属性防止重复绑定
         clone.removeAttribute('data-card-expand');
-        // 移除 badge 避免重复显示
         cardModalBody.innerHTML = '';
         cardModalBody.appendChild(cardModalClose);
         cardModalBody.appendChild(clone);
         cardModal.classList.add('active');
+        // 弹窗内重新初始化轮播
+        initCarousels(cardModalBody, true);
     }
     function closeModal() {
         cardModal.classList.remove('active');
@@ -721,37 +736,53 @@
     cardModalClose.addEventListener('click', closeModal);
     cardModal.addEventListener('click', e => { if (e.target === cardModal) closeModal(); });
 
-    // ── 轮播图 ──
-    document.querySelectorAll('[data-carousel]').forEach(car => {
-        const track = car.querySelector('.carousel-track');
-        const imgs  = track.querySelectorAll('img');
-        const dots  = car.querySelectorAll('.carousel-dot');
-        let idx = 0;
+    // ── 轮播图初始化（页面 + 弹窗复用） ──
+    function initCarousels(root, inModal) {
+        root.querySelectorAll('[data-carousel]').forEach(car => {
+            const track = car.querySelector('.carousel-track');
+            if (!track) return;
+            const imgs = track.querySelectorAll('img');
+            const dots = car.querySelectorAll('.carousel-dot');
+            let idx = 0;
 
-        function goTo(n) {
-            idx = (n + imgs.length) % imgs.length;
-            track.style.transform = `translateX(-${idx * 100}%)`;
-            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-        }
+            function goTo(n) {
+                idx = (n + imgs.length) % imgs.length;
+                track.style.transform = `translateX(-${idx * 100}%)`;
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            }
 
-        // 点击图片直接 lightbox
-        track.addEventListener('click', e => {
-            if (e.target.tagName === 'IMG') {
-                e.stopPropagation();
-                openLightbox(imgs[idx].src, imgs[idx].alt);
+            // 圆点点击切换
+            dots.forEach((dot, i) => {
+                dot.style.pointerEvents = 'auto';
+                dot.addEventListener('click', e => { e.stopPropagation(); goTo(i); });
+            });
+
+            // 点击图片 lightbox
+            track.addEventListener('click', e => {
+                if (e.target.tagName === 'IMG') {
+                    e.stopPropagation();
+                    openLightbox(imgs[idx].src, imgs[idx].alt);
+                }
+            });
+
+            let timer;
+            const startAuto = () => { timer = setInterval(() => goTo(idx + 1), 2800); };
+            const stopAuto  = () => clearInterval(timer);
+
+            if (inModal) {
+                // 弹窗内直接启动自动播放
+                startAuto();
+            } else {
+                const sectionEl = car.closest('section');
+                new IntersectionObserver(entries => {
+                    entries[0].isIntersecting ? startAuto() : stopAuto();
+                }, { threshold: 0.3 }).observe(sectionEl || car);
             }
         });
+    }
 
-        // 自动轮播，section 可见时运行
-        let timer;
-        const startAuto = () => { timer = setInterval(() => goTo(idx + 1), 2800); };
-        const stopAuto  = () => clearInterval(timer);
-
-        const sectionEl = car.closest('section');
-        new IntersectionObserver(entries => {
-            entries[0].isIntersecting ? startAuto() : stopAuto();
-        }, { threshold: 0.3 }).observe(sectionEl || car);
-    });
+    // 页面初始化
+    initCarousels(document, false);
     </script>
 </body>
 </html>

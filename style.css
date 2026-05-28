@@ -332,30 +332,13 @@ strong { font-weight: 500; }
 ══════════════════════════════════════════ */
 .about-inner {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 56px;
+    grid-template-columns: 210px 1fr;
+    gap: 48px;
     align-items: center;
 }
 
 .about-left {
-    text-align: center;
-}
-
-.about-avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 auto 20px;
-    border: 2px solid var(--border);
-    position: relative;
-}
-
-.about-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 25%;
+    text-align: left;
 }
 
 .about-name {
@@ -371,6 +354,44 @@ strong { font-weight: 500; }
     color: var(--text-light);
     letter-spacing: 0.15em;
     text-transform: uppercase;
+}
+
+/* 数字卡片组 */
+.about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.about-stat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 12px 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.about-stat--accent {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #fdfbf8, #f8f3ed);
+}
+
+.about-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.about-stat-label {
+    font-size: 9px;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+    line-height: 1.5;
 }
 
 .about-intro {
@@ -748,7 +769,7 @@ strong { font-weight: 500; }
     line-height: 1.7;
 }
 
-.proj-card--lg .proj-card h3 { font-size: 15px; }
+.proj-card.proj-card--lg h3 { font-size: 15px; }
 
 /* ── Side-card 小轮播 ── */
 .side-carousel {
@@ -1651,13 +1672,8 @@ strong { font-weight: 500; }
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    .about-left {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        text-align: left;
-    }
-    .about-avatar { margin: 0; flex-shrink: 0; }
+    .about-left { text-align: left; }
+    .about-stats { grid-template-columns: repeat(4, 1fr); }
     .about-grid { grid-template-columns: 1fr 1fr; }
 
     /* ── 核心能力 ── */
